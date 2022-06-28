@@ -14,7 +14,7 @@ from webob import Request, Response
 import parse
 
 
-class API:
+class Palm:
     def __init__(self):
         self.routes = {}
 
