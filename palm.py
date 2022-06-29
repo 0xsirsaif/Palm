@@ -9,6 +9,7 @@ TODO / hypothesis / notes / anger ..etc:
 """
 
 import functools
+import inspect
 
 from webob import Request, Response
 import parse
@@ -36,7 +37,13 @@ class Palm:
         response = Response()
         handler, kwargs = self.find_the_handler(request.path)
         if handler:
-            handler(request, response, **kwargs)
+            if inspect.isclass(handler):
+                method = getattr(handler(), request.method.lower(), None)
+                if not method:
+                    raise AttributeError(f"Method {method} is not allowed")
+                method(request, response, **kwargs)
+            else:
+                handler(request, response, **kwargs)
         else:
             self.not_found_response(response)
 
@@ -51,6 +58,8 @@ class Palm:
             print(f"Got {path}. Add to routes")
             self.routes[path] = handler
             return handler
+
+        assert path not in self.routes, f"route {path} already exists"
 
         return wrapper
 

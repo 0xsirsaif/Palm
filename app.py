@@ -32,3 +32,12 @@ def helo(request, response, name):
 def calculate_age(request, response, birthdate):
     age = datetime.datetime.utcnow() - birthdate
     response.text = f"Age is: {age}"
+
+
+@app.route("/book")
+class AllBooks:
+    def get(self, request, response):
+        response.text = "endpoint for all books"
+
+    def post(self, request, response):
+        response.text = "endpoint to create a book"
