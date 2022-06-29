@@ -2,5 +2,5 @@
 
 `gunicorn app:app`
 
-TFD: the first date, my own terminology which means that I am learning / doing this kind of work for the first time and with no prior knowledge
+TFD: The First Date, a word I've coined to describe the fact that I'm learning a new concept or building this kinf of project for the first time with no prior experience.
 
